@@ -179,46 +179,7 @@ export default function CategoryManager({ onNotify, onNavigateTab }: CategoryMan
         </button>
       </div>
 
-      {/* 2. KPI Cards Row */}
-      <div className="kpi-stats-grid">
-        <div className="kpi-card glass-panel">
-          <div className="kpi-icon-circle kpi-icon-purple">
-            <Grid size={22} />
-          </div>
-          <div className="kpi-content">
-            <span className="kpi-title">Total Categories</span>
-            <span className="kpi-value">{categories.length}</span>
-            <span className="kpi-subtext">All top-level categories</span>
-          </div>
-          <button className="card-more-btn"><MoreVertical size={14} /></button>
-        </div>
-
-        <div className="kpi-card glass-panel">
-          <div className="kpi-icon-circle kpi-icon-green">
-            <FolderTree size={22} />
-          </div>
-          <div className="kpi-content">
-            <span className="kpi-title">Total Subcategories</span>
-            <span className="kpi-value">{totalSubcategoriesCount}</span>
-            <span className="kpi-subtext">Across all categories</span>
-          </div>
-          <button className="card-more-btn"><MoreVertical size={14} /></button>
-        </div>
-
-        <div className="kpi-card glass-panel">
-          <div className="kpi-icon-circle kpi-icon-blue">
-            <Shirt size={22} />
-          </div>
-          <div className="kpi-content">
-            <span className="kpi-title">Total Products</span>
-            <span className="kpi-value">{totalProductsCount}</span>
-            <span className="kpi-subtext">Catalog items stored</span>
-          </div>
-          <button className="card-more-btn"><MoreVertical size={14} /></button>
-        </div>
-      </div>
-
-      {/* 3. Search & Filter Bar */}
+      {/* 2. Search & Filter Bar */}
       <div className="glass-panel" style={styles.filterBar}>
         <div style={styles.searchWrapper}>
           <Search size={18} style={styles.searchIcon} />
