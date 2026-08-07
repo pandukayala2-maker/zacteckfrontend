@@ -145,7 +145,7 @@ export default function QRGenerator({ onNotify }: QRGeneratorProps) {
             {/* White Right Panel */}
             <div style={styles.cardRightWhite}>
               <div style={styles.cardLogoRow}>
-                <div style={styles.redBadgeZT}>ZT</div>
+                <img src="/logo.png" alt="ZacTEK Logo" style={{ height: '32px', objectFit: 'contain' }} />
                 <div style={styles.companyTitleWrap}>
                   <h4 style={styles.companyMainTitle}>{settings?.companyName || 'ZacTEK Corp W.L.L'}</h4>
                   <div style={styles.companyArabicTitle}>{settings?.companyArabic || 'شركة زاك تك ذ.م.م'}</div>

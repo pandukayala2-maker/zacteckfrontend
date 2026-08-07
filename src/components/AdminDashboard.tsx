@@ -190,7 +190,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
         transform: isSidebarOpen ? 'translateX(0)' : 'none'
       }} className="glass-panel no-print">
         <div style={styles.sidebarHeader}>
-          <div style={styles.brandBadge}>ZT</div>
+          <img src="/logo.png" alt="ZacTEK Logo" style={{ height: '42px', objectFit: 'contain' }} />
           <div>
             <h1 style={styles.brandTitle}>{settings.companyName}</h1>
             <span style={styles.brandSubtitle}>Management Portal</span>

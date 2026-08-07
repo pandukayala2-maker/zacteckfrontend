@@ -79,7 +79,7 @@ export default function CustomerCatalog({ onNavigateToLogin }: CustomerCatalogPr
       {/* 1. Top Navbar Header */}
       <header style={styles.navbar} className="glass-panel catalog-navbar">
         <div style={styles.navLogo} className="catalog-nav-logo">
-          <div style={styles.logoBadge} className="catalog-logo-badge">ZT</div>
+          <img src="/logo.png" alt="ZacTEK Logo" style={{ height: '42px', objectFit: 'contain' }} />
           <div>
             <h1 style={styles.logoTitle} className="catalog-logo-title">{settings?.companyName || 'ZacTEK Corp W.L.L'}</h1>
             <p style={styles.logoSubtitle} className="catalog-logo-subtitle">Wholesale Catalog Store</p>
@@ -389,7 +389,7 @@ export default function CustomerCatalog({ onNavigateToLogin }: CustomerCatalogPr
           {/* Left Column: Company & Profile info */}
           <div style={styles.footerLeft}>
             <div style={styles.footerBrandRow}>
-              <div style={styles.footerLogoBadge}>ZT</div>
+              <img src="/logo.png" alt="ZacTEK Logo" style={{ height: '46px', objectFit: 'contain' }} />
               <div>
                 <h3 style={styles.footerLogoTitle}>{settings?.companyName || 'ZacTEK Corp W.L.L'}</h3>
                 <p style={styles.footerArabic}>{settings?.companyArabic || 'شركة زاك تيك ذ.م.م'}</p>

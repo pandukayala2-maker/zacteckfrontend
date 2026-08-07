@@ -35,7 +35,7 @@ export default function Login({ onBackToCatalog, onLoginSuccess }: LoginProps) {
 
       <div style={styles.loginCard} className="glass-panel animate-fade-in">
         <div style={styles.header}>
-          <div style={styles.logoBadge}>ZT</div>
+          <img src="/logo.png" alt="ZacTEK Logo" style={{ height: '48px', objectFit: 'contain', marginBottom: '12px' }} />
           <h2 style={styles.title}>{settings.companyName}</h2>
           <p style={styles.subtitle}>Management Console Login</p>
         </div>
