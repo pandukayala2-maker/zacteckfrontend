@@ -229,13 +229,8 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
   return (
     <div className="animate-fade-in" style={{ textAlign: 'left' }}>
       
-      {/* 1. Top Header Row */}
-      <div style={styles.headerRow}>
-        <div>
-          <h2 style={styles.title}>Products Management</h2>
-          <p style={styles.subtitle}>Create, edit, and categorize wholesale catalog items.</p>
-        </div>
-
+      {/* 1. Action Row */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <button onClick={handleOpenAddForm} className="btn btn-primary" style={styles.headerBtn}>
           <Plus size={16} /> Add Product
         </button>

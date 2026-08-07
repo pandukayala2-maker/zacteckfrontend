@@ -7,8 +7,8 @@ import SettingsManager from './SettingsManager';
 import QRGenerator from './QRGenerator';
 import UserManager from './UserManager';
 import { 
-  FolderTree, Tag, Settings, QrCode, 
-  LogOut, Eye, Menu, X, Bell, User, 
+  FolderTree, Settings, QrCode, 
+  LogOut, Eye, Menu, X, 
   History, MessageSquare, Shield, Grid, Package 
 } from 'lucide-react';
 
@@ -46,13 +46,53 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
     window.open(`https://wa.me/${cleanPhone.replace('+', '')}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
+  const getTabTitleInfo = () => {
+    switch (activeTab) {
+      case 'categories':
+        return {
+          title: 'Categories Management',
+          subtitle: 'Organize and structure wholesale product categories.'
+        };
+      case 'subcategories':
+        return {
+          title: 'Subcategories Management',
+          subtitle: 'Classify items into precise subcategories.'
+        };
+      case 'products':
+        return {
+          title: 'Products Management',
+          subtitle: 'Create, edit, and categorize wholesale catalog items.'
+        };
+      case 'qr':
+        return {
+          title: 'QR Business Card',
+          subtitle: 'Generate and print circular QR code cards for clients.'
+        };
+      case 'settings':
+        return {
+          title: 'Profile & Settings',
+          subtitle: 'Configure company information and contact details.'
+        };
+      case 'users':
+        return {
+          title: 'Users & Roles',
+          subtitle: 'Manage administrator accounts and permissions.'
+        };
+      case 'logs':
+        return {
+          title: 'Activity Logs',
+          subtitle: 'Review security audit logs and catalogue history.'
+        };
+      default:
+        return {
+          title: 'Products Management',
+          subtitle: 'Create, edit, and categorize wholesale catalog items.'
+        };
+    }
+  };
+
   const renderLogsTab = () => (
     <div className="animate-fade-in" style={{ textAlign: 'left' }}>
-      <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '8px' }}>Activity Logs</h2>
-      <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', marginBottom: '24px' }}>
-        Review security audit logs and catalogue modification events.
-      </p>
-
       <div className="glass-panel" style={{ padding: '24px' }}>
         <h3 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <History size={18} color="var(--color-primary)" /> System Log History
@@ -76,7 +116,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
                 <td>Admin</td>
                 <td><code>192.168.1.45</code></td>
                 <td>May 18, 2024 03:15 PM</td>
-                <td><span className="status-badge active" style={{ backgroundColor: 'rgba(16,185,129,0.08)', color: '#34d399' }}>Success</span></td>
+                <td><span className="status-badge active">Success</span></td>
               </tr>
               <tr>
                 <td><code>EVT-2981</code></td>
@@ -84,7 +124,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
                 <td>Admin</td>
                 <td><code>192.168.1.45</code></td>
                 <td>May 17, 2024 09:20 AM</td>
-                <td><span className="status-badge active" style={{ backgroundColor: 'rgba(16,185,129,0.08)', color: '#34d399' }}>Success</span></td>
+                <td><span className="status-badge active">Success</span></td>
               </tr>
               <tr>
                 <td><code>EVT-2840</code></td>
@@ -92,7 +132,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
                 <td>Admin</td>
                 <td><code>192.168.1.45</code></td>
                 <td>May 16, 2024 04:10 PM</td>
-                <td><span className="status-badge active" style={{ backgroundColor: 'rgba(16,185,129,0.08)', color: '#34d399' }}>Success</span></td>
+                <td><span className="status-badge active">Success</span></td>
               </tr>
               <tr>
                 <td><code>EVT-2703</code></td>
@@ -100,7 +140,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
                 <td>Admin</td>
                 <td><code>192.168.1.45</code></td>
                 <td>May 15, 2024 08:30 AM</td>
-                <td><span className="status-badge active" style={{ backgroundColor: 'rgba(16,185,129,0.08)', color: '#34d399' }}>Success</span></td>
+                <td><span className="status-badge active">Success</span></td>
               </tr>
             </tbody>
           </table>
@@ -253,7 +293,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
 
       {/* Main Right Content Panel */}
       <div style={styles.mainContent}>
-        {/* Top Header Bar */}
+        {/* Top Header Bar with Dynamic Active Page Title */}
         <header style={styles.topHeader} className="glass-panel no-print">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button
@@ -263,10 +303,12 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
               {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
             <div style={styles.headerWelcome}>
-              <strong>Dashboard Console</strong>
-              <span style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
-                {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}
-              </span>
+              <h2 style={{ fontSize: '1.35rem', fontWeight: '700', color: '#0f172a', margin: 0 }}>
+                {getTabTitleInfo().title}
+              </h2>
+              <p style={{ fontSize: '0.8rem', color: '#64748b', margin: '2px 0 0 0' }}>
+                {getTabTitleInfo().subtitle}
+              </p>
             </div>
           </div>
 
