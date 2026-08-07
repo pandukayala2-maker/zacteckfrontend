@@ -132,13 +132,8 @@ export default function UserManager({ onNotify }: UserManagerProps) {
   return (
     <div className="animate-fade-in" style={{ textAlign: 'left' }}>
       
-      {/* Top Header */}
-      <div style={styles.headerRow}>
-        <div>
-          <h2 style={styles.title}>Users & Roles</h2>
-          <p style={styles.subtitle}>Manage system administrators, editors, and marketing representative roles.</p>
-        </div>
-
+      {/* Top Action Row */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <button onClick={handleOpenAddModal} className="btn btn-primary" style={styles.headerBtn}>
           <UserPlus size={16} /> Add New User
         </button>

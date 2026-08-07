@@ -45,25 +45,17 @@ export default function QRGenerator({ onNotify }: QRGeneratorProps) {
   return (
     <div className="animate-fade-in" style={styles.container}>
       
-      {/* 1. Header & Top Buttons */}
-      <div style={styles.header} className="no-print">
-        <div>
-          <h2 style={styles.title}>QR Card Generator</h2>
-          <p style={styles.subtitle}>
-            Scan this QR code to view the wholesale catalogue. Share or print this card for meetings with shop owners.
-          </p>
-        </div>
-        <div style={styles.btnRow}>
-          <button onClick={handleCopyLink} className="btn btn-secondary" style={styles.actionBtn}>
-            <LinkIcon size={16} /> Copy URL
-          </button>
-          <button onClick={handleDownloadQR} className="btn btn-secondary" style={styles.actionBtn}>
-            <Download size={16} /> Download QR Only
-          </button>
-          <button onClick={handlePrintCard} className="btn btn-primary" style={styles.actionBtn}>
-            <Printer size={16} /> Print Card
-          </button>
-        </div>
+      {/* 1. Top Action Buttons */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginBottom: '20px' }} className="no-print">
+        <button onClick={handleCopyLink} className="btn btn-secondary" style={styles.actionBtn}>
+          <LinkIcon size={16} /> Copy URL
+        </button>
+        <button onClick={handleDownloadQR} className="btn btn-secondary" style={styles.actionBtn}>
+          <Download size={16} /> Download QR Only
+        </button>
+        <button onClick={handlePrintCard} className="btn btn-primary" style={styles.actionBtn}>
+          <Printer size={16} /> Print Card
+        </button>
       </div>
 
       {/* 2. Main 2-Column Grid Layout */}

@@ -47,11 +47,6 @@ export default function SettingsManager({ onNotify }: SettingsManagerProps) {
 
   return (
     <div className="animate-fade-in" style={styles.container}>
-      <div style={styles.header}>
-        <h2 style={styles.title}>System Settings</h2>
-        <p style={styles.subtitle}>Modify wholesale contacts, business card graphics, and system passwords.</p>
-      </div>
-
       <form onSubmit={handleSaveProfile} style={styles.layout}>
         {/* Profile Card Settings */}
         <div className="glass-panel" style={styles.panel}>

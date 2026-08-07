@@ -169,20 +169,14 @@ export default function CategoryManager({ onNotify, onNavigateTab }: CategoryMan
   return (
     <div className="animate-fade-in" style={{ textAlign: 'left' }}>
       
-      {/* 1. Header Area */}
-      <div style={styles.headerRow}>
-        <div>
-          <h2 style={styles.title}>Categories</h2>
-          <p style={styles.subtitle}>Manage all top-level wholesale product categories.</p>
-        </div>
-        <div style={styles.headerBtnGroup}>
-          <button onClick={handleExportData} className="btn btn-secondary" style={styles.headerBtn}>
-            <Download size={16} /> Export
-          </button>
-          <button onClick={handleOpenAddModal} className="btn btn-primary" style={styles.headerBtn}>
-            <Plus size={16} /> Add Category
-          </button>
-        </div>
+      {/* 1. Action Buttons Row */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px', marginBottom: '20px' }}>
+        <button onClick={handleExportData} className="btn btn-secondary" style={styles.headerBtn}>
+          <Download size={16} /> Export
+        </button>
+        <button onClick={handleOpenAddModal} className="btn btn-primary" style={styles.headerBtn}>
+          <Plus size={16} /> Add Category
+        </button>
       </div>
 
       {/* 2. KPI Cards Row */}

@@ -122,12 +122,8 @@ export default function SubcategoryManager({ onNotify }: SubcategoryManagerProps
     <div className="animate-fade-in" style={{ textAlign: 'left' }}>
       
       {/* 1. Header Row */}
-      <div style={styles.headerRow}>
-        <div>
-          <h2 style={styles.title}>Subcategories</h2>
-          <p style={styles.subtitle}>Organize items under main product categories.</p>
-        </div>
-
+      {/* 1. Action Row */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <button onClick={handleOpenAddModal} className="btn btn-primary" style={styles.headerBtn}>
           <Plus size={16} /> Add Subcategory
         </button>
