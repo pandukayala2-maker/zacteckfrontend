@@ -8,30 +8,35 @@ type ViewMode = 'admin' | 'catalog' | 'login';
 
 function AppContent() {
   const { currentUser } = useData();
-  const [view, setView] = useState<ViewMode>('admin');
+  const [view, setView] = useState<ViewMode>('catalog');
 
   // Route based on URL search query
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const viewParam = params.get('view');
 
-    if (viewParam === 'catalog') {
-      setView('catalog');
+    if (viewParam === 'admin') {
+      if (currentUser) {
+        setView('admin');
+      } else {
+        setView('login');
+      }
     } else if (viewParam === 'login') {
       setView('login');
     } else {
-      setView('admin');
+      setView('catalog');
     }
   }, []);
 
-  // Redirect to catalog when user logs out
-  useEffect(() => {
-    if (!currentUser && view === 'admin') {
-      setView('catalog');
-    }
-  }, [currentUser, view]);
-
   const handleNavigateToLogin = () => {
+    if (currentUser) {
+      setView('admin');
+    } else {
+      setView('login');
+    }
+  };
+
+  const handleLoginSuccess = () => {
     setView('admin');
   };
 
@@ -43,11 +48,14 @@ function AppContent() {
   };
 
   if (view === 'admin') {
+    if (!currentUser) {
+      return <Login onBackToCatalog={handleBackToCatalog} onLoginSuccess={handleLoginSuccess} />;
+    }
     return <AdminDashboard onBackToCatalog={handleBackToCatalog} />;
   }
 
   if (view === 'login') {
-    return <Login onBackToCatalog={handleBackToCatalog} />;
+    return <Login onBackToCatalog={handleBackToCatalog} onLoginSuccess={handleLoginSuccess} />;
   }
 
   return <CustomerCatalog onNavigateToLogin={handleNavigateToLogin} />;

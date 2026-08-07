@@ -4,9 +4,10 @@ import { Lock, User, LogIn, ArrowLeft } from 'lucide-react';
 
 interface LoginProps {
   onBackToCatalog: () => void;
+  onLoginSuccess?: () => void;
 }
 
-export default function Login({ onBackToCatalog }: LoginProps) {
+export default function Login({ onBackToCatalog, onLoginSuccess }: LoginProps) {
   const { login, settings } = useData();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +19,9 @@ export default function Login({ onBackToCatalog }: LoginProps) {
 
     const success = login(username, password);
     if (success) {
-      // App will update view automatically
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      }
     } else {
       setError('Invalid username or password. Please try again.');
     }
