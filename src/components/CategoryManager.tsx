@@ -259,9 +259,11 @@ export default function CategoryManager({ onNotify, onNavigateTab }: CategoryMan
                           <div className={`cat-icon-square ${iconConfig.frame}`}>
                             {iconConfig.element}
                           </div>
-                          <div>
-                            <strong style={{ color: '#fff', fontSize: '0.95rem' }}>{cat.name}</strong>
-                            <span className="cat-details-desc">
+                          <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <strong style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: '700' }}>
+                              {cat.name}
+                            </strong>
+                            <span style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '2px', lineHeight: '1.4' }}>
                               {cat.description || 'No description provided.'}
                             </span>
                           </div>
@@ -271,10 +273,10 @@ export default function CategoryManager({ onNotify, onNavigateTab }: CategoryMan
                       {/* PRODUCTS COUNT */}
                       <td>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
-                          <span style={{ fontWeight: '600', color: '#fff', fontSize: '0.9rem' }}>
+                          <span style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.9rem' }}>
                             {prodCount} Products
                           </span>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                          <span style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '2px' }}>
                             {subCount} Subcategories
                           </span>
                         </div>
@@ -282,7 +284,7 @@ export default function CategoryManager({ onNotify, onNavigateTab }: CategoryMan
 
                       {/* VIEWS */}
                       <td>
-                        <span style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
+                        <span style={{ color: '#475569', fontWeight: '600', fontSize: '0.9rem' }}>
                           {mockViews.toLocaleString()}
                         </span>
                       </td>

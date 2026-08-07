@@ -214,8 +214,8 @@ export default function SubcategoryManager({ onNotify }: SubcategoryManagerProps
                       {/* SUBCATEGORY NAME */}
                       <td>
                         <div>
-                          <strong style={{ color: '#fff', fontSize: '0.95rem' }}>{sc.name}</strong>
-                          <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: '700' }}>{sc.name}</strong>
+                          <span style={{ display: 'block', fontSize: '0.8rem', color: '#64748b', marginTop: '2px', lineHeight: '1.4' }}>
                             {sc.description || 'No description provided.'}
                           </span>
                         </div>
@@ -238,7 +238,7 @@ export default function SubcategoryManager({ onNotify }: SubcategoryManagerProps
 
                       {/* PRODUCTS COUNT */}
                       <td>
-                        <span style={{ fontWeight: '600', color: '#fff', fontSize: '0.9rem' }}>
+                        <span style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.9rem' }}>
                           {prodCount} Products
                         </span>
                       </td>

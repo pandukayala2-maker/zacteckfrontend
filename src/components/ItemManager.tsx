@@ -402,8 +402,8 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                       {/* PRODUCT DETAILS */}
                       <td>
                         <div>
-                          <strong style={{ color: '#fff', fontSize: '0.95rem' }}>{item.name}</strong>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.95rem', fontWeight: '700' }}>{item.name}</strong>
+                          <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '2px' }}>
                             Brand: {item.brand || 'ONN Premiums'}
                           </div>
                         </div>
@@ -412,10 +412,10 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                       {/* CATEGORY / SUBCAT */}
                       <td>
                         <div>
-                          <span style={{ fontWeight: '600', color: '#fff', fontSize: '0.85rem' }}>
+                          <span style={{ fontWeight: '700', color: '#0f172a', fontSize: '0.85rem' }}>
                             {getCategoryName(item.categoryId)}
                           </span>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                          <div style={{ fontSize: '0.75rem', color: '#64748b' }}>
                             {getSubcategoryName(item.subcategoryId)}
                           </div>
                         </div>
