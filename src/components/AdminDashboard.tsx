@@ -36,6 +36,7 @@ export default function AdminDashboard({ onBackToCatalog }: AdminDashboardProps)
   const handleLogout = () => {
     if (confirm('Are you sure you want to log out of the administration console?')) {
       logout();
+      onBackToCatalog();
     }
   };
 

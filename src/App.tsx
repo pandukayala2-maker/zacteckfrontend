@@ -24,6 +24,13 @@ function AppContent() {
     }
   }, []);
 
+  // Redirect to catalog when user logs out
+  useEffect(() => {
+    if (!currentUser && view === 'admin') {
+      setView('catalog');
+    }
+  }, [currentUser, view]);
+
   const handleNavigateToLogin = () => {
     setView('admin');
   };
