@@ -50,6 +50,27 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
   const [fabric, setFabric] = useState('');
   const [packaging, setPackaging] = useState('');
 
+  // Image Upload Mode state ('upload' | 'url' | 'presets')
+  const [imageMode, setImageMode] = useState<'upload' | 'url' | 'presets'>('upload');
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        onNotify('error', 'File size exceeds 5MB limit. Please choose a smaller image.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setImageUrl(reader.result);
+          onNotify('success', 'Product image uploaded successfully!');
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   // Form Subcategories helper
   const [filteredSubcats, setFilteredSubcats] = useState<Subcategory[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -594,15 +615,171 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label>Product Image URL</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="/images/polo_tshirt.jpg"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                />
+              {/* Product Image Upload UI */}
+              <div className="form-group" style={{ marginBottom: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <label style={{ margin: 0, fontWeight: '600', color: '#fff' }}>Product Image *</label>
+                  <div style={{ display: 'flex', gap: '4px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setImageMode('upload')}
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        border: '1px solid',
+                        cursor: 'pointer',
+                        backgroundColor: imageMode === 'upload' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
+                        borderColor: imageMode === 'upload' ? 'var(--color-primary)' : 'var(--color-border)',
+                        color: imageMode === 'upload' ? '#fff' : 'var(--color-text-secondary)'
+                      }}
+                    >
+                      <Upload size={12} style={{ marginRight: '4px' }} /> Upload File
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setImageMode('url')}
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        border: '1px solid',
+                        cursor: 'pointer',
+                        backgroundColor: imageMode === 'url' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
+                        borderColor: imageMode === 'url' ? 'var(--color-primary)' : 'var(--color-border)',
+                        color: imageMode === 'url' ? '#fff' : 'var(--color-text-secondary)'
+                      }}
+                    >
+                      Image URL
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setImageMode('presets')}
+                      style={{
+                        padding: '4px 10px',
+                        borderRadius: '6px',
+                        fontSize: '0.75rem',
+                        border: '1px solid',
+                        cursor: 'pointer',
+                        backgroundColor: imageMode === 'presets' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
+                        borderColor: imageMode === 'presets' ? 'var(--color-primary)' : 'var(--color-border)',
+                        color: imageMode === 'presets' ? '#fff' : 'var(--color-text-secondary)'
+                      }}
+                    >
+                      Presets
+                    </button>
+                  </div>
+                </div>
+
+                {/* Live Thumbnail Preview */}
+                {imageUrl && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '14px',
+                    padding: '10px 14px',
+                    borderRadius: '12px',
+                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid var(--color-border)',
+                    marginBottom: '12px'
+                  }}>
+                    <img
+                      src={imageUrl}
+                      alt="Preview"
+                      style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }}
+                      onError={(e: any) => { e.target.src = 'https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?w=500&auto=format&fit=crop&q=60'; }}
+                    />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#fff' }}>Image Attached</div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {imageUrl.startsWith('data:') ? 'Custom Uploaded Image File' : imageUrl}
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setImageUrl('')}
+                      style={{ background: 'none', border: 'none', color: '#f87171', cursor: 'pointer', padding: '4px' }}
+                      title="Remove Image"
+                    >
+                      <Trash size={16} />
+                    </button>
+                  </div>
+                )}
+
+                {/* File Drag-and-Drop Area */}
+                {imageMode === 'upload' && (
+                  <div style={{
+                    border: '2px dashed var(--color-border)',
+                    borderRadius: '12px',
+                    padding: '20px 16px',
+                    textAlign: 'center',
+                    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    transition: 'all 0.2s ease'
+                  }}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileUpload}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        opacity: 0,
+                        cursor: 'pointer'
+                      }}
+                    />
+                    <Upload size={26} color="var(--color-primary)" style={{ marginBottom: '6px' }} />
+                    <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#fff' }}>
+                      Click to choose image or drag &amp; drop file here
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                      Supports PNG, JPG, WEBP, SVG (Max 5MB)
+                    </div>
+                  </div>
+                )}
+
+                {/* Direct URL Input */}
+                {imageMode === 'url' && (
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Paste image URL (e.g. https://example.com/item.jpg)"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                  />
+                )}
+
+                {/* Presets Grid */}
+                {imageMode === 'presets' && (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: '8px' }}>
+                    {PRESET_IMAGES.map((preset, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setImageUrl(preset.url)}
+                        style={{
+                          padding: '8px',
+                          borderRadius: '8px',
+                          border: '1px solid',
+                          borderColor: imageUrl === preset.url ? 'var(--color-primary)' : 'var(--color-border)',
+                          backgroundColor: imageUrl === preset.url ? 'rgba(211,30,37,0.15)' : 'rgba(255,255,255,0.02)',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        <img src={preset.url} alt={preset.name} style={{ width: '36px', height: '36px', borderRadius: '4px', objectFit: 'cover' }} />
+                        <span style={{ fontSize: '0.65rem', color: '#fff', textAlign: 'center', lineHeight: '1.2' }}>{preset.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div className="form-group">
