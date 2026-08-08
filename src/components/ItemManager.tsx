@@ -421,12 +421,14 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                         </div>
                       </td>
 
-                      {/* SKU / STOCK */}
+                      {/* SKU / PRICE / STOCK */}
                       <td>
                         <div>
-                          <code>{item.sku || `SKU-${item.id.slice(-4)}`}</code>
-                          <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', marginTop: '2px' }}>
-                            Stock: {item.stock || 450} pcs
+                          <strong style={{ display: 'block', color: '#d31e25', fontSize: '0.9rem', fontWeight: '800' }}>
+                            {item.price || 'KWD 3.500'}
+                          </strong>
+                          <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '2px' }}>
+                            <code>{item.sku || `SKU-${item.id.slice(-4)}`}</code> | Stock: {item.stock || 150} pcs
                           </div>
                         </div>
                       </td>
@@ -508,7 +510,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
             <form onSubmit={handleSubmit} style={styles.modalForm}>
               <div style={styles.formGrid}>
                 <div className="form-group">
-                  <label>Product Name *</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Product Name *</label>
                   <input
                     type="text"
                     className="form-control"
@@ -520,7 +522,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                 </div>
 
                 <div className="form-group">
-                  <label>Brand Name</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Brand Name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -533,7 +535,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
 
               <div style={styles.formGrid}>
                 <div className="form-group">
-                  <label>Category *</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Category *</label>
                   <select
                     className="form-control"
                     value={catId}
@@ -551,7 +553,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                 </div>
 
                 <div className="form-group">
-                  <label>Subcategory *</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Subcategory *</label>
                   <select
                     className="form-control"
                     value={subcatId}
@@ -567,7 +569,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
 
               <div style={styles.formGrid}>
                 <div className="form-group">
-                  <label>SKU Code</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>SKU Code</label>
                   <input
                     type="text"
                     className="form-control"
@@ -578,7 +580,19 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                 </div>
 
                 <div className="form-group">
-                  <label>Stock Quantity</label>
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Wholesale Price (KWD / USD) *</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="e.g. KWD 3.500"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label style={{ color: '#0f172a', fontWeight: '600' }}>Stock Quantity</label>
                   <input
                     type="number"
                     className="form-control"
@@ -590,7 +604,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
               </div>
 
               <div className="form-group">
-                <label>Available Sizes</label>
+                <label style={{ color: '#0f172a', fontWeight: '600' }}>Available Sizes</label>
                 <div style={styles.pillContainer}>
                   {SIZE_OPTIONS.map(size => (
                     <button
@@ -599,9 +613,9 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                       onClick={() => handleSizeToggle(size)}
                       style={{
                         ...styles.modalSizeBtn,
-                        backgroundColor: selectedSizes.includes(size) ? 'var(--color-primary)' : 'rgba(255,255,255,0.05)',
-                        borderColor: selectedSizes.includes(size) ? 'var(--color-primary)' : 'var(--color-border)',
-                        color: selectedSizes.includes(size) ? '#fff' : 'var(--color-text-secondary)'
+                        backgroundColor: selectedSizes.includes(size) ? 'var(--color-primary)' : '#f1f5f9',
+                        borderColor: selectedSizes.includes(size) ? 'var(--color-primary)' : '#cbd5e1',
+                        color: selectedSizes.includes(size) ? '#fff' : '#475569'
                       }}
                     >
                       {size}
@@ -613,7 +627,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
               {/* Product Image Upload UI */}
               <div className="form-group" style={{ marginBottom: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <label style={{ margin: 0, fontWeight: '600', color: '#fff' }}>Product Image *</label>
+                  <label style={{ margin: 0, fontWeight: '600', color: '#0f172a' }}>Product Image *</label>
                   <div style={{ display: 'flex', gap: '4px' }}>
                     <button
                       type="button"
@@ -624,9 +638,9 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                         fontSize: '0.75rem',
                         border: '1px solid',
                         cursor: 'pointer',
-                        backgroundColor: imageMode === 'upload' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
-                        borderColor: imageMode === 'upload' ? 'var(--color-primary)' : 'var(--color-border)',
-                        color: imageMode === 'upload' ? '#fff' : 'var(--color-text-secondary)'
+                        backgroundColor: imageMode === 'upload' ? 'var(--color-primary)' : '#f1f5f9',
+                        borderColor: imageMode === 'upload' ? 'var(--color-primary)' : '#cbd5e1',
+                        color: imageMode === 'upload' ? '#fff' : '#475569'
                       }}
                     >
                       <Upload size={12} style={{ marginRight: '4px' }} /> Upload File
@@ -640,9 +654,9 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                         fontSize: '0.75rem',
                         border: '1px solid',
                         cursor: 'pointer',
-                        backgroundColor: imageMode === 'url' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
-                        borderColor: imageMode === 'url' ? 'var(--color-primary)' : 'var(--color-border)',
-                        color: imageMode === 'url' ? '#fff' : 'var(--color-text-secondary)'
+                        backgroundColor: imageMode === 'url' ? 'var(--color-primary)' : '#f1f5f9',
+                        borderColor: imageMode === 'url' ? 'var(--color-primary)' : '#cbd5e1',
+                        color: imageMode === 'url' ? '#fff' : '#475569'
                       }}
                     >
                       Image URL
@@ -656,9 +670,9 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                         fontSize: '0.75rem',
                         border: '1px solid',
                         cursor: 'pointer',
-                        backgroundColor: imageMode === 'presets' ? 'var(--color-primary)' : 'rgba(255,255,255,0.04)',
-                        borderColor: imageMode === 'presets' ? 'var(--color-primary)' : 'var(--color-border)',
-                        color: imageMode === 'presets' ? '#fff' : 'var(--color-text-secondary)'
+                        backgroundColor: imageMode === 'presets' ? 'var(--color-primary)' : '#f1f5f9',
+                        borderColor: imageMode === 'presets' ? 'var(--color-primary)' : '#cbd5e1',
+                        color: imageMode === 'presets' ? '#fff' : '#475569'
                       }}
                     >
                       Presets
@@ -674,19 +688,19 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                     gap: '14px',
                     padding: '10px 14px',
                     borderRadius: '12px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid var(--color-border)',
+                    backgroundColor: '#f8fafc',
+                    border: '1px solid #cbd5e1',
                     marginBottom: '12px'
                   }}>
                     <img
                       src={imageUrl}
                       alt="Preview"
-                      style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }}
+                      style={{ width: '54px', height: '54px', borderRadius: '8px', objectFit: 'cover', border: '1px solid #cbd5e1' }}
                       onError={(e: any) => { e.target.src = 'https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?w=500&auto=format&fit=crop&q=60'; }}
                     />
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#fff' }}>Image Attached</div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#0f172a' }}>Image Attached</div>
+                      <div style={{ fontSize: '0.75rem', color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {imageUrl.startsWith('data:') ? 'Custom Uploaded Image File' : imageUrl}
                       </div>
                     </div>
@@ -704,11 +718,11 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                 {/* File Drag-and-Drop Area */}
                 {imageMode === 'upload' && (
                   <div style={{
-                    border: '2px dashed var(--color-border)',
+                    border: '2px dashed #cbd5e1',
                     borderRadius: '12px',
                     padding: '20px 16px',
                     textAlign: 'center',
-                    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                    backgroundColor: '#f8fafc',
                     cursor: 'pointer',
                     position: 'relative',
                     transition: 'all 0.2s ease'
@@ -728,10 +742,10 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                       }}
                     />
                     <Upload size={26} color="var(--color-primary)" style={{ marginBottom: '6px' }} />
-                    <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#fff' }}>
+                    <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#0f172a' }}>
                       Click to choose image or drag &amp; drop file here
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '4px' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '4px' }}>
                       Supports PNG, JPG, WEBP, SVG (Max 5MB)
                     </div>
                   </div>
@@ -760,8 +774,8 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                           padding: '8px',
                           borderRadius: '8px',
                           border: '1px solid',
-                          borderColor: imageUrl === preset.url ? 'var(--color-primary)' : 'var(--color-border)',
-                          backgroundColor: imageUrl === preset.url ? 'rgba(211,30,37,0.15)' : 'rgba(255,255,255,0.02)',
+                          borderColor: imageUrl === preset.url ? 'var(--color-primary)' : '#cbd5e1',
+                          backgroundColor: imageUrl === preset.url ? 'rgba(211,30,37,0.1)' : '#ffffff',
                           cursor: 'pointer',
                           display: 'flex',
                           flexDirection: 'column',
@@ -770,7 +784,7 @@ export default function ItemManager({ onNotify }: ItemManagerProps) {
                         }}
                       >
                         <img src={preset.url} alt={preset.name} style={{ width: '36px', height: '36px', borderRadius: '4px', objectFit: 'cover' }} />
-                        <span style={{ fontSize: '0.65rem', color: '#fff', textAlign: 'center', lineHeight: '1.2' }}>{preset.name}</span>
+                        <span style={{ fontSize: '0.7rem', color: '#0f172a', fontWeight: '500' }}>{preset.name}</span>
                       </button>
                     ))}
                   </div>
@@ -883,20 +897,20 @@ const styles: Record<string, React.CSSProperties> = {
     height: '40px',
     borderRadius: '8px',
     overflow: 'hidden',
-    backgroundColor: '#1b223c',
+    backgroundColor: '#f1f5f9',
   },
   sizePillBadge: {
     fontSize: '0.7rem',
     padding: '2px 6px',
     borderRadius: '4px',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    border: '1px solid var(--color-border)',
-    color: 'var(--color-text-secondary)',
+    backgroundColor: '#f1f5f9',
+    border: '1px solid #cbd5e1',
+    color: '#475569',
   },
   actionIconBtn: {
-    background: 'rgba(255,255,255,0.03)',
-    border: '1px solid var(--color-border)',
-    color: 'var(--color-text-secondary)',
+    background: '#f8fafc',
+    border: '1px solid #cbd5e1',
+    color: '#475569',
     padding: '6px',
     borderRadius: '6px',
     cursor: 'pointer',
@@ -910,7 +924,8 @@ const styles: Record<string, React.CSSProperties> = {
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    backgroundColor: 'rgba(15, 23, 42, 0.65)',
+    backdropFilter: 'blur(4px)',
     zIndex: 1000,
     display: 'flex',
     alignItems: 'center',
@@ -919,12 +934,14 @@ const styles: Record<string, React.CSSProperties> = {
   },
   modalContent: {
     width: '100%',
-    maxWidth: '650px',
+    maxWidth: '680px',
     maxHeight: '90vh',
     overflowY: 'auto',
-    backgroundColor: '#0c0f1b',
-    borderRadius: '16px',
-    border: '1px solid var(--color-border)',
+    backgroundColor: '#ffffff',
+    color: '#0f172a',
+    borderRadius: '20px',
+    border: '1px solid #cbd5e1',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
     padding: '24px',
   },
   modalHeader: {

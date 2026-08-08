@@ -443,7 +443,12 @@ export default function CustomerCatalog({ onNavigateToLogin }: CustomerCatalogPr
                       ))}
                     </div>
 
-                    <div style={styles.originTag}>Made in India</div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <div style={styles.originTag}>Made in India</div>
+                      <span style={{ fontWeight: '800', color: '#d31e25', fontSize: '0.95rem' }}>
+                        {item.price || 'KWD 3.500'}
+                      </span>
+                    </div>
 
                     <div style={styles.cardFooter}>
                       <button
