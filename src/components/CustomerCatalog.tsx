@@ -147,128 +147,210 @@ export default function CustomerCatalog({ onNavigateToLogin }: CustomerCatalogPr
         </div>
       )}
 
-      {/* 2. Hero Showcase Banner */}
-      <section id="hero-section" style={styles.heroSection} className="catalog-hero-section">
-        <div style={styles.heroLayout}>
-          
-          {/* Hero Left Content */}
-          <div style={styles.heroContent} className="catalog-hero-content">
-            <div style={styles.pillBadge}>WHOLESALE CATALOG</div>
-            
-            <h1 style={styles.heroTitle} className="catalog-hero-title">
-              Premium Garments <br />
-              <span style={styles.titleGradient}>&amp; Trading</span>
-            </h1>
-            
-            <p style={styles.heroSubtitle} className="catalog-hero-subtitle">
-              Browse our wholesale catalog of premium garments, shirts, vests and trading logistics services.
-            </p>
+      {/* 2. Top Collection Banner - Matches Screenshot 1 */}
+      <section id="hero-section" style={{ padding: '16px 16px 8px 16px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div 
+          className="trend-hero-banner"
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '200px',
+            borderRadius: '20px',
+            overflow: 'hidden',
+            backgroundImage: 'linear-gradient(135deg, rgba(76, 29, 149, 0.85), rgba(15, 23, 42, 0.9)), url("/images/hero_bloom_time.jpg")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '24px 28px',
+            color: '#ffffff',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.12)'
+          }}
+        >
+          <div>
+            <span style={{ fontSize: '0.75rem', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', opacity: 0.9, display: 'block', marginBottom: '6px' }}>
+              NEW COLLECTION
+            </span>
+            <h2 style={{ fontSize: '2rem', fontWeight: '900', letterSpacing: '-0.02em', color: '#ffffff', margin: 0, lineHeight: 1.1 }}>
+              GARMENTS &amp; INNERWEAR
+            </h2>
+          </div>
+          <button 
+            onClick={() => scrollToSection('products-section')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(8px)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.4)',
+              borderRadius: '20px',
+              padding: '8px 18px',
+              fontSize: '0.85rem',
+              fontWeight: '700',
+              cursor: 'pointer'
+            }}
+          >
+            Explore &gt;
+          </button>
+        </div>
+      </section>
 
-            {/* Rounded Search Capsule Input */}
-            <div style={styles.searchCapsule} className="catalog-search-capsule">
-              <Search size={18} style={styles.searchIcon} />
-              <input
-                type="text"
-                placeholder="Search products, brands, models and more..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={styles.searchInput}
-              />
+      {/* 3. EXPLORE TRENDS - 2x2 Cards Grid matching Screenshot 1 */}
+      <section id="categories-section" style={{ padding: '20px 16px 30px 16px', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h3 style={{ fontSize: '1.25rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.5px', color: '#0f172a', margin: 0 }}>
+            EXPLORE TRENDS
+          </h3>
+        </div>
+
+        {/* 2x2 Trend Image Cards Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' }}>
+          
+          {/* Card 1: Polo T-Shirts */}
+          <div 
+            onClick={() => { setSelectedCatId(categories[0]?.id || 'all'); setSelectedSubcatId('all'); scrollToSection('products-section'); }}
+            style={{
+              position: 'relative',
+              height: '240px',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              backgroundImage: 'url("/images/trend_polo_tshirts.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
+            }}
+            className="trend-card-item"
+          >
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: '24px 14px 14px 14px',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0))',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <span style={{ color: '#ffffff', fontWeight: '800', fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+                Polo T-Shirts
+              </span>
             </div>
           </div>
 
-          {/* Hero Right 3D Showcase Stage */}
-          <div style={styles.heroStageWrapper} className="desktop-only">
-            <div style={styles.stageGlow}></div>
-            <div style={styles.stagePedestal}>
-              <img 
-                src="/images/hero_3d_stage.jpg" 
-                alt="3D Polo T-Shirt Showcase Stage" 
-                style={styles.heroStageImg}
-              />
-              <div style={styles.pedestalBadge}>ZT</div>
+          {/* Card 2: Innerwear & Vests */}
+          <div 
+            onClick={() => { setSelectedCatId(categories[0]?.id || 'all'); setSelectedSubcatId('all'); scrollToSection('products-section'); }}
+            style={{
+              position: 'relative',
+              height: '240px',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              backgroundImage: 'url("/images/trend_men_vests.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
+            }}
+            className="trend-card-item"
+          >
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: '24px 14px 14px 14px',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0))',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <span style={{ color: '#ffffff', fontWeight: '800', fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+                Innerwear &amp; Vests
+              </span>
+            </div>
+          </div>
+
+          {/* Card 3: Ladies Intimates & Bras */}
+          <div 
+            onClick={() => { setSelectedCatId(categories[0]?.id || 'all'); setSelectedSubcatId('all'); scrollToSection('products-section'); }}
+            style={{
+              position: 'relative',
+              height: '240px',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              backgroundImage: 'url("/images/trend_ladies_bras.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
+            }}
+            className="trend-card-item"
+          >
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: '24px 14px 14px 14px',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0))',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <span style={{ color: '#ffffff', fontWeight: '800', fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+                Ladies Bras &amp; Undies
+              </span>
+            </div>
+          </div>
+
+          {/* Card 4: Boys Underwear & Shirts */}
+          <div 
+            onClick={() => { setSelectedCatId(categories[0]?.id || 'all'); setSelectedSubcatId('all'); scrollToSection('products-section'); }}
+            style={{
+              position: 'relative',
+              height: '240px',
+              borderRadius: '18px',
+              overflow: 'hidden',
+              backgroundImage: 'url("/images/trend_boys_wear.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              cursor: 'pointer',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
+            }}
+            className="trend-card-item"
+          >
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: '24px 14px 14px 14px',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0))',
+              display: 'flex',
+              alignItems: 'flex-end'
+            }}>
+              <span style={{ color: '#ffffff', fontWeight: '800', fontSize: '1.05rem', letterSpacing: '-0.01em' }}>
+                Boys Wear
+              </span>
             </div>
           </div>
 
         </div>
-      </section>
 
-      {/* 3. Category Cards Grid */}
-      <section id="categories-section" style={styles.categoriesSection} className="catalog-categories-section">
-        <div style={styles.categoriesGrid} className="catalog-categories-grid">
-          
-          {/* Card 1: All Categories */}
-          <button
-            onClick={() => { setSelectedCatId('all'); setSelectedSubcatId('all'); }}
-            style={{
-              ...styles.catCard,
-              borderColor: selectedCatId === 'all' ? '#d31e25' : 'rgba(255,255,255,0.08)',
-              boxShadow: selectedCatId === 'all' ? '0 0 20px rgba(211,30,37,0.3)' : 'none',
-              background: selectedCatId === 'all' ? 'rgba(211, 30, 37, 0.12)' : 'rgba(15, 20, 32, 0.7)'
-            }}
-            className="glass-panel catalog-cat-card"
-          >
-            <div style={{ ...styles.catIconCircle, backgroundColor: 'rgba(211, 30, 37, 0.15)', color: '#ef4444' }} className="catalog-cat-icon">
-              <Grid size={22} />
-            </div>
-            <strong style={styles.catTitle} className="catalog-cat-title">All Categories</strong>
-            <span style={styles.catSubtext} className="catalog-cat-subtext">View all</span>
-          </button>
-
-          {/* Card 2: Apparel & Garments */}
-          <button
-            onClick={() => setSelectedCatId(categories[0]?.id || 'cat-1')}
-            style={{
-              ...styles.catCard,
-              borderColor: selectedCatId === (categories[0]?.id || 'cat-1') ? '#d31e25' : 'rgba(255,255,255,0.08)',
-              boxShadow: selectedCatId === (categories[0]?.id || 'cat-1') ? '0 0 20px rgba(211,30,37,0.3)' : 'none',
-              background: selectedCatId === (categories[0]?.id || 'cat-1') ? 'rgba(211, 30, 37, 0.12)' : 'rgba(15, 20, 32, 0.7)'
-            }}
-            className="glass-panel catalog-cat-card"
-          >
-            <div style={{ ...styles.catIconCircle, backgroundColor: 'rgba(34, 197, 94, 0.15)', color: '#22c55e' }} className="catalog-cat-icon">
-              <Shirt size={22} />
-            </div>
-            <strong style={styles.catTitle} className="catalog-cat-title">Apparel &amp; Garments</strong>
-            <span style={styles.catSubtext} className="catalog-cat-subtext">Clothing</span>
-          </button>
-
-          {/* Card 3: Corporate Services */}
-          <button
-            onClick={() => setSelectedCatId(categories[1]?.id || 'cat-2')}
-            style={{
-              ...styles.catCard,
-              borderColor: selectedCatId === (categories[1]?.id || 'cat-2') ? '#d31e25' : 'rgba(255,255,255,0.08)',
-              boxShadow: selectedCatId === (categories[1]?.id || 'cat-2') ? '0 0 20px rgba(211,30,37,0.3)' : 'none',
-              background: selectedCatId === (categories[1]?.id || 'cat-2') ? 'rgba(211, 30, 37, 0.12)' : 'rgba(15, 20, 32, 0.7)'
-            }}
-            className="glass-panel catalog-cat-card"
-          >
-            <div style={{ ...styles.catIconCircle, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b' }} className="catalog-cat-icon">
-              <Package size={22} />
-            </div>
-            <strong style={styles.catTitle} className="catalog-cat-title">Corporate Services</strong>
-            <span style={styles.catSubtext} className="catalog-cat-subtext">Services</span>
-          </button>
-
-          {/* Card 4: Environmental Services */}
-          <button
-            onClick={() => setSelectedCatId(categories[2]?.id || 'cat-3')}
-            style={{
-              ...styles.catCard,
-              borderColor: selectedCatId === (categories[2]?.id || 'cat-3') ? '#d31e25' : 'rgba(255,255,255,0.08)',
-              boxShadow: selectedCatId === (categories[2]?.id || 'cat-3') ? '0 0 20px rgba(211,30,37,0.3)' : 'none',
-              background: selectedCatId === (categories[2]?.id || 'cat-3') ? 'rgba(211, 30, 37, 0.12)' : 'rgba(15, 20, 32, 0.7)'
-            }}
-            className="glass-panel catalog-cat-card"
-          >
-            <div style={{ ...styles.catIconCircle, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#10b981' }} className="catalog-cat-icon">
-              <Leaf size={22} />
-            </div>
-            <strong style={styles.catTitle} className="catalog-cat-title">Environmental Services</strong>
-            <span style={styles.catSubtext} className="catalog-cat-subtext">Eco Solutions</span>
-          </button>
-
+        {/* Rounded Search Input Bar */}
+        <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'center' }}>
+          <div style={styles.searchCapsule} className="catalog-search-capsule">
+            <Search size={18} style={styles.searchIcon} />
+            <input
+              type="text"
+              placeholder="Search polo t-shirts, vests, bras, underwear..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={styles.searchInput}
+            />
+          </div>
         </div>
       </section>
 
